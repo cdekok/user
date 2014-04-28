@@ -1,9 +1,10 @@
 <?php
 return [
     'routes' => [
-        "/posts" => [
-            'module'     => '\\Cept\\User',
-            'controller' => '\\Cept\User\Controller\\LoginController',
+        "/login" => [
+            'module'     => '\Cept\User',
+            'namespace'  => '\Cept\User\Controller',
+            'controller' => 'User',
             'action'     => 'login',
         ]
     ]

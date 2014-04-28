@@ -1,5 +1,5 @@
 <?php
-namespace Cept\Blog;
+namespace Cept\User;
 
 class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
 {
@@ -17,6 +17,7 @@ class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
         //Registering the view component
         $di->set('view', function() {
             $view = new \Phalcon\Mvc\View();
+            
             $view->setViewsDir(realpath(__DIR__.'/..//view/'));
             return $view;
         });
