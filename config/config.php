@@ -1,11 +1,14 @@
 <?php
 return [
     'routes' => [
-        "/login" => [
-            'module'     => '\Cept\User',
-            'namespace'  => '\Cept\User\Controller',
-            'controller' => 'User',
-            'action'     => 'login',
+        'user-login' => [
+            'route' => '/login',
+            'params' => [
+                'module'     => '\Cept\User',
+                'namespace'  => '\Cept\User\Controller',
+                'controller' => 'User',
+                'action'     => 'login',
+            ]
         ]
     ]
 ];
