@@ -10,5 +10,8 @@ return [
                 'action'     => 'login',
             ]
         ]
+    ],
+    'commands' => [
+        '\Cept\User\Cli\UserAdd'
     ]
 ];
