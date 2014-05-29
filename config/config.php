@@ -4,7 +4,7 @@ return [
         'user-login' => [
             'route' => '/login',
             'params' => [
-                'module'     => '\Cept\User',
+                'module'     => 'cept-user',
                 'namespace'  => '\Cept\User\Controller',
                 'controller' => 'User',
                 'action'     => 'login',

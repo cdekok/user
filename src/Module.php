@@ -7,19 +7,12 @@ class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
     }
     
     public function registerServices($di) {
-        //Registering a dispatcher
-        $di->set('dispatcher', function() {
-            $dispatcher = new \Phalcon\Mvc\Dispatcher();
-            $dispatcher->setDefaultNamespace(__NAMESPACE__."\Controller");
-            return $dispatcher;
-        });
-
         //Registering the view component
-        $di->set('view', function() {
+        if ($di->get('view')) {
+            $view = $di->get('view');
+        } else {
             $view = new \Phalcon\Mvc\View();
-            
-            $view->setViewsDir(realpath(__DIR__.'/..//view/'));
-            return $view;
-        });
+        }
+        $view->setViewsDir(realpath(__DIR__.'/..//view/'));
     }
 }

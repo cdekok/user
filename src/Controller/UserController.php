@@ -8,8 +8,12 @@ class UserController extends \Phalcon\Mvc\Controller {
         $form = new \Cept\User\Form\Login();
         
         if ($this->request->isPost()) {
-            if ($form->isValid($this->request->getPost())) {
+            $post = $this->request->getPost();
+            if ($form->isValid($post)) {
                 // Login
+                $username = $form->getValue('username');
+                $password = $form->getValue('password');
+                
             }
         }
         $this->view->setVar('form', $form);

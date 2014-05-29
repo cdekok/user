@@ -20,5 +20,6 @@
         "psr-4": {
             "Cept\\User\\": "src"
         }
-    }
+    },    
+    "bin": ["bin/user.php"]    
 }
