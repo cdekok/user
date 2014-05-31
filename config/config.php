@@ -13,5 +13,9 @@ return [
     ],
     'commands' => [
         '\Cept\User\Cli\UserAdd'
+    ],
+    'factories' => [
+        '\Cept\User\Model\UserRepo' => '\Cept\User\Model\UserRepoFactory',
+        '\Cept\User\Model\RoleRepo' => '\Cept\User\Model\RoleRepoFactory'
     ]
 ];

@@ -1,28 +1,20 @@
 <?php
 namespace Cept\User\Model;
 
-class User {
+class Role {
     
     use \Cept\User\Hydrate\HydrateTrait;
     
     /**
-     * Username
      * @var string
      */
-    protected $username;
+    protected $title;
     
     /**
-     * User email
      * @var string
      */
-    protected $email;
-    
-    /**
-     * User password (hashed)
-     * @var string
-     */
-    protected $password;
-        
+    protected $description;
+     
     /**
      * Creatd date time
      * @var string
@@ -35,16 +27,12 @@ class User {
      */
     protected $modified;
 
-    public function getUsername() {
-        return $this->username;
+    public function getTitle() {
+        return $this->title;
     }
 
-    public function getEmail() {
-        return $this->email;
-    }
-
-    public function getPassword() {
-        return $this->password;
+    public function getDescription() {
+        return $this->description;
     }
 
     public function getCreated() {
@@ -55,18 +43,13 @@ class User {
         return $this->modified;
     }
 
-    public function setUsername($username) {
-        $this->username = $username;
+    public function setTitle($title) {
+        $this->title = $title;
         return $this;
     }
 
-    public function setEmail($email) {
-        $this->email = $email;
-        return $this;
-    }
-
-    public function setPassword($password) {
-        $this->password = $password;
+    public function setDescription($description) {
+        $this->description = $description;
         return $this;
     }
 
@@ -78,5 +61,5 @@ class User {
     public function setModified($modified) {
         $this->modified = $modified;
         return $this;
-    }              
+    }    
 }
