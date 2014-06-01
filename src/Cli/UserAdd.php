@@ -24,6 +24,8 @@ class UserAdd extends \Phapp\Cli\Command {
         $user['username'] = $dialog->ask($output, 'Username: ');
         $user['email'] = $dialog->ask($output, 'Email: ');
         $user['password'] = $dialog->ask($output, 'Password: ');
+        $user['status'] = \Cept\User\Model\UserRepo::STATUS_ACTIVE;
+        
         $userModel = $repo->create($user);        
         $output->writeln('Added user');
         

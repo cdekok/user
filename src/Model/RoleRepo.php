@@ -36,6 +36,39 @@ class RoleRepo {
     }
     
     /**
+     * Create role
+     * 
+     * @param array $role
+     * @return \Cept\User\Model\Role
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\CreateException
+     */
+    public function create(array $role) {        
+        if (!array_key_exists('title', $role)) {
+            throw new Exception\InvalidArgumentException('Missing required field: '.$field);
+        }
+        if (!isset($role['description'])) {
+            $role['description'] = null;        
+        }        
+        $role['created'] = new \DateTime;        
+        
+        if (!$this->db->insert(
+                $this->getIdentifier(), 
+                $role,
+                [
+                    \PDO::PARAM_STR,
+                    \PDO::PARAM_STR,
+                    'datetime',
+                ]
+            )) {
+            throw new Exception\CreateException('Could not create role');
+        }
+        $model = new Role();
+        $model->hydrate($role);
+        return $model;
+    }
+
+    /**
      * Get list of all role names
      * 
      * @return array

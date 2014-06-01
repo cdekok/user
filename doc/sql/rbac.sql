@@ -6,6 +6,7 @@ CREATE TABLE rbac_user
   username character varying(70) NOT NULL,
   password character varying(255) NOT NULL,
   email character varying(255) NOT NULL,
+  status integer NOT NULL,
   created timestamp without time zone NOT NULL,
   modified timestamp without time zone,
   CONSTRAINT rbac_user_pkey PRIMARY KEY (username),
