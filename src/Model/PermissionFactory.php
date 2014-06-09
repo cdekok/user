@@ -1,7 +1,7 @@
 <?php
 namespace Cept\User\Model;
 
-class RoleRepoFactory extends \Phapp\DI\AbstractServiceFactory implements \Phapp\DI\ServiceFactoryInterface {
+class PermissionFactory extends \Phapp\DI\AbstractServiceFactory implements \Phapp\DI\ServiceFactoryInterface {
     
     /**
      * @var \Cept\User\Model\RoleRepo

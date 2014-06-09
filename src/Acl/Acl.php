@@ -74,17 +74,38 @@ class Acl {
     /**
      * Load roles / permision into the acl adapter
      * 
-     * @todo Do some caching & make parent roles work
+     * @todo Do some caching
      */
     private function loadResources() {
         $roles = $this->roleRepo->fetchAll();
+        $roles->setCacheResult(true);
         foreach ($roles as $role) {
-            /** @var $role \Cept\User\Model\Role **/            
-            $this->adapter->addRole($role->getTitle());
+            /** @var $role \Cept\User\Model\Role **/ 
+            $aclRole = new \Phalcon\Acl\Role($role->getTitle, $role->getDescription());
+            $childRole = $this->getChildRole($roles, $role);
+            if ($childRole) {
+                $childRole = $childRole->getTitle();
+            }
+            $this->adapter->addRole($aclRole, $childRole);
             $resources = $this->permissionRepo->getAllResourcesPermissions();
             foreach ($resources as $resource => $permissions) {
                 $aclPermission = new \Phalcon\Acl\Resource($resource);
                 $this->adapter->addResource($resource, $permissions);
+            }
+        }
+    }
+    
+    /**
+     * Return child role
+     * 
+     * @param \Phapp\Db\Result\ResultSet $roles
+     * @param \Cept\User\Model\Role $role
+     * @return \Cept\User\Model\Role
+     */
+    private function getChildRole(\Phapp\Db\Result\ResultSet $roles, \Cept\User\Model\Role $role) {
+        foreach ($roles as $r) {
+            if ($r->getParent() === $role->getTitle()) {
+                return $r;
             }
         }
     }

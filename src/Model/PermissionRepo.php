@@ -101,7 +101,7 @@ class PermissionRepo {
      * Get result
      * 
      * @param \Doctrine\DBAL\Query\QueryBuilder $qb
-     * @return \Iterator
+     * @return \Phapp\Db\Result\ResultSet
      */
     protected function getResult(\Doctrine\DBAL\Query\QueryBuilder $qb) {
         $hydrator = new Permission();

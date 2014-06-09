@@ -35,7 +35,7 @@ return [
     'factories' => [
         '\Cept\User\Model\UserRepo' => '\Cept\User\Model\UserRepoFactory',
         '\Cept\User\Model\RoleRepo' => '\Cept\User\Model\RoleRepoFactory',
-        '\Cept\User\Model\PermissionRepo' => '\Cept\User\Model\PermissionRepoFactory',
+        '\Cept\User\Model\PermissionRepo' => '\Cept\User\Model\PermissionFactory',
         '\Cept\User\Auth\Auth' => '\Cept\User\Auth\AuthFactory',
         '\Cept\User\Auth\Identity' => '\Cept\User\Auth\IdentityFactory',
         '\Cept\User\Acl\Acl' => '\Cept\User\Acl\AclFactory',

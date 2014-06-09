@@ -1,9 +1,9 @@
 <?php
 namespace Cept\User\Model;
 
-class Permission {
+class Permission implements \Phapp\Hydrate\HydrateInterface {
     
-    use \Phapp\Hydrate\HydrateTrait
+    use \Phapp\Hydrate\HydrateTrait;
     
     /**
      * @var string

@@ -1,7 +1,7 @@
 <?php
 namespace Cept\User\Model;
 
-class User {
+class User implements \Phapp\Hydrate\HydrateInterface {
     
     use \Phapp\Hydrate\HydrateTrait;
     
