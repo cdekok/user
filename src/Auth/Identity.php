@@ -53,6 +53,22 @@ class Identity {
     }
     
     /**
+     * Check if the user is logged in
+     * 
+     * @return boolean
+     */
+    public function isLoggedIn() {
+        return (boolean)$this->getSession()->get('username');
+    }
+
+    /**
+     * Log out user
+     */
+    public function logout() {
+        $this->getSession()->destroy();
+    }
+
+    /**
      * Get session
      * @return \Phalcon\Session\Bag
      */

@@ -9,7 +9,25 @@ return [
                 'controller' => 'User',
                 'action'     => 'login',
             ]
-        ]
+        ],
+        'user-profile' => [
+            'route' => '/profile',
+            'params' => [
+                'module'     => 'cept-user',
+                'namespace'  => '\Cept\User\Controller',
+                'controller' => 'User',
+                'action'     => 'profile',
+            ]
+        ],
+        'user-logout' => [
+            'route' => '/logout',
+            'params' => [
+                'module'     => 'cept-user',
+                'namespace'  => '\Cept\User\Controller',
+                'controller' => 'User',
+                'action'     => 'logout',
+            ]
+        ],
     ],
     'commands' => [
         '\Cept\User\Cli\UserAdd'

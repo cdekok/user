@@ -3,7 +3,7 @@ namespace Cept\User\Model;
 
 class User {
     
-    use \Cept\User\Hydrate\HydrateTrait;
+    use \Phapp\Hydrate\HydrateTrait;
     
     /**
      * Username
