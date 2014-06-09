@@ -38,5 +38,6 @@ return [
         '\Cept\User\Model\PermissionRepo' => '\Cept\User\Model\PermissionRepoFactory',
         '\Cept\User\Auth\Auth' => '\Cept\User\Auth\AuthFactory',
         '\Cept\User\Auth\Identity' => '\Cept\User\Auth\IdentityFactory',
+        '\Cept\User\Acl\Acl' => '\Cept\User\Acl\AclFactory',
     ]
 ];

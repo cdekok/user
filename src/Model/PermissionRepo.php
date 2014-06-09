@@ -55,5 +55,56 @@ class PermissionRepo {
             throw new Exception\CreateException('Could not create permission');
         }
         return $permission;
+    }
+    
+    /**
+     * Get list of all role names
+     * 
+     * @return \Cept\User\Model\RoleResult
+     */
+    public function fetchAll() {
+        $identifier = $this->getIdentifier();
+        $select = $this->db->createQueryBuilder()->select('*')->from($identifier, 'r');
+        return $this->getResult($select);
+    }
+    
+    /**
+     * Return an array of all resources and their permission
+     * <code>
+     * [
+     *  'User' => ['create', 'delete'],
+     *  'Blog' => ['create']
+     * ]
+     * </code>
+     * 
+     * @return array
+     */
+    public function getAllResourcesPermissions() {
+        $permissions = $this->fetchAll();
+        $return = [];
+        foreach ($permissions as $permission) {
+            $return[$permission->getResource()][] = $permission->getTitle();
+        }
+        return $return;
+    }
+
+    /**
+     * Get db identifier
+     * 
+     * @return string
+     */
+    protected function getIdentifier() {
+        return $this->db->quoteIdentifier($this->tableName);
     }    
+    
+    /**
+     * Get result
+     * 
+     * @param \Doctrine\DBAL\Query\QueryBuilder $qb
+     * @return \Iterator
+     */
+    protected function getResult(\Doctrine\DBAL\Query\QueryBuilder $qb) {
+        $hydrator = new Permission();
+        return new \Phapp\Db\Result\ResultSet($qb, $hydrator);
+    }
 }

@@ -67,6 +67,17 @@ class Identity {
     public function logout() {
         $this->getSession()->destroy();
     }
+    
+    /**
+     * 
+     * @param string $permission
+     * @return boolean
+     */
+    public function hasPermission($permission) {
+        if (!$this->isLoggedIn()) {
+            return false;
+        }
+    }
 
     /**
      * Get session
