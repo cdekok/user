@@ -28,7 +28,7 @@ class UserRepo {
      * Tablename
      * @var string
      */
-    protected $tableName = 'rbac_user';
+    protected $tableName = 'user';
 
     /**
      * Password minumum amount of characters
@@ -115,7 +115,7 @@ class UserRepo {
         $model = new \Cept\User\Model\User();
         $model->hydrate($user);
         return $model;
-    }    
+    }
 
     /**
      * Get minimum amount of characters for password

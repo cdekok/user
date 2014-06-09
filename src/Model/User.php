@@ -18,16 +18,22 @@ class User {
     protected $email;
     
     /**
-     * User password (hashed)
-     * @var string
-     */
-    protected $password;
-        
-    /**
      * User status
      * @var int
      */
     protected $status;
+    
+    /**
+     * User profile
+     * @var mixed
+     */
+    protected $profile;
+    
+    /**
+     * User password (hashed)
+     * @var string
+     */
+    protected $password;
             
     /**
      * Creatd date time
@@ -94,4 +100,13 @@ class User {
         $this->modified = $modified;
         return $this;
     }              
+    
+    public function getProfile() {
+        return $this->profile;
+    }
+
+    public function setProfile($profile) {
+        $this->profile = $profile;
+        return $this;
+    }
 }

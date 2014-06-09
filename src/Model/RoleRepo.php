@@ -13,19 +13,19 @@ class RoleRepo {
      * Tablename
      * @var string
      */
-    protected $tableName = 'rbac_role';
+    protected $tableName = 'role';
     
     /**
      * Permission link tablename
      * @var string
      */
-    protected $linkPermissionTableName = 'rbac_role_has_permission';
+    protected $linkPermissionTableName = 'role_has_permission';
     
     /**
      * Role link tablename
      * @var string
      */
-    protected $linkRoleTableName = 'rbac_user_has_role';
+    protected $linkRoleTableName = 'user_has_role';
     
     /**
      * User repository
@@ -71,18 +71,12 @@ class RoleRepo {
     /**
      * Get list of all role names
      * 
-     * @return array
+     * @return \Cept\User\Model\RoleResult
      */
     public function fetchAll() {
         $identifier = $this->getIdentifier();
-        $result = $this->db->fetchAll('SELECT * FROM '.$identifier);
-        $return = [];
-        foreach ($result as $row) {
-            $model = new Role();
-            $model->hydrate((array)$row);
-            $return[] = $model;
-        }
-        return $return;
+        $select = $this->db->createQueryBuilder()->select('*')->from($identifier, 'r');
+        return $this->getResult($select);
     }
     
     /**
@@ -128,11 +122,36 @@ class RoleRepo {
      * @return boolean
      */
     public function addUserToRole(User $user, Role $role) {
-        $table = $this->db->quoteIdentifier($this->linkRoleTableName);
+        $table = $this->getUserRoleIdentifier();
         return $this->db->insert($table, [
             'user_username' => $user->getUsername(),
             'role_title' => $role->getTitle()
         ]);
+    }
+
+    /**
+     * Retrieve list of users
+     * 
+     * @param \Cept\User\Model\User $user
+     */
+    public function userHasRoles(User $user) {
+        $select = $this->db->createQueryBuilder();
+        $select->select('r.*')
+                ->from($this->getIdentifier(), 'r')
+                ->innerJoin('r', 'user_has_role', 'uhr', 'r.title = uhr.role_title')
+                ->where('uhr.user_username = '.$select->createNamedParameter($user->getUsername()));        
+        return $this->getResult($select);
+    }
+
+    /**
+     * Get result
+     * 
+     * @param \Doctrine\DBAL\Query\QueryBuilder $qb
+     * @return \Cept\User\Model\RoleResult
+     */
+    protected function getResult(\Doctrine\DBAL\Query\QueryBuilder $qb) {
+        $hydrator = new Role();
+        return new RoleResult($qb, $hydrator);
     }
 
     /**
@@ -142,5 +161,14 @@ class RoleRepo {
      */
     protected function getIdentifier() {
         return $this->db->quoteIdentifier($this->tableName);
+    }
+    
+    /**
+     * Get user has role link table identifier
+     * 
+     * @return string
+     */
+    protected function getUserRoleIdentifier() {
+        return $this->db->quoteIdentifier($this->linkRoleTableName);
     }
 }

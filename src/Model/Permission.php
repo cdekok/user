@@ -3,7 +3,7 @@ namespace Cept\User\Model;
 
 class Permission {
     
-    use \Cept\User\Hydrate\HydrateTrait;
+    use \Phapp\Hydrate\HydrateTrait
     
     /**
      * @var string
@@ -75,5 +75,5 @@ class Permission {
     public function setModified($modified) {
         $this->modified = $modified;
         return $this;
-    }    
+    }
 }

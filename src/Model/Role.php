@@ -1,9 +1,9 @@
 <?php
 namespace Cept\User\Model;
 
-class Role {
+class Role implements \Phapp\Hydrate\HydrateInterface {
     
-    use \Cept\User\Hydrate\HydrateTrait;
+    use \Phapp\Hydrate\HydrateTrait;
     
     /**
      * @var string
@@ -14,9 +14,15 @@ class Role {
      * @var string
      */
     protected $description;
-     
+    
     /**
-     * Creatd date time
+     * Parent role
+     * @var string
+     */
+    protected $parent;
+    
+    /**
+     * Created date time
      * @var string
      */
     protected $created;
@@ -61,5 +67,14 @@ class Role {
     public function setModified($modified) {
         $this->modified = $modified;
         return $this;
-    }    
+    }  
+    
+    public function getParent() {
+        return $this->parent;
+    }
+
+    public function setParent($parent) {
+        $this->parent = $parent;
+        return $this;
+    }
 }

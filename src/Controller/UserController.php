@@ -4,7 +4,7 @@ namespace Cept\User\Controller;
 class UserController extends \Phalcon\Mvc\Controller {
     
     public function loginAction()
-    {        
+    {       
         $form = new \Cept\User\Form\Login();
         if ($this->request->isPost()) {
             $post = $this->request->getPost();
@@ -30,5 +30,19 @@ class UserController extends \Phalcon\Mvc\Controller {
      */
     protected function getAuth() {
         return $this->getDI()->get('\Cept\User\Auth\Auth');
-    }    
+    }
+        
+    /**
+     * @return \Cept\User\Model\UserRepo
+     */
+    protected function getUserRepo() {
+        return $this->getDI()->get('\Cept\User\Model\UserRepo');
+    }
+    
+    /**
+     * @return \Cept\User\Model\RoleRepo
+     */
+    protected function getRoleRepo() {
+        return $this->getDI()->get('\Cept\User\Model\RoleRepo');
+    }
 }
