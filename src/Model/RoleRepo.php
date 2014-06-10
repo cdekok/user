@@ -142,6 +142,18 @@ class RoleRepo {
                 ->where('uhr.user_username = '.$select->createNamedParameter($user->getUsername()));        
         return $this->getResult($select);
     }
+    
+    /**
+     * Get roles permission
+     * 
+     * @return \Phapp\Db\Result\ResultSet
+     */
+    public function fetchAllRoleHasPermission() {
+        $select = $this->db->createQueryBuilder();
+        $select->select('*')
+                ->from($this->linkPermissionTableName, 'rhp');
+        return new \Phapp\Db\Result\ResultSet($select);
+    }
 
     /**
      * Get result
