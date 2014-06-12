@@ -13,13 +13,19 @@ class AclFactory extends \Phapp\DI\AbstractServiceFactory implements \Phapp\DI\S
      * 
      * @return \Cept\User\Model\UserRepo
      */
-    public function createService() {
-        if (!$this->cache) {
+    public function createService() {        
+        if (!$this->cache) {            
             $adapter = new \Phalcon\Acl\Adapter\Memory();
             /** @var $userRepo \Cept\User\Model\RoleRepo **/
-            $roles = $this->getDI()->get('\Cept\User\Model\RoleRepo');
+            $roles = $this->getDI()->get('\Cept\User\Model\RoleRepo');            
             $permission = $this->getDI()->get('\Cept\User\Model\PermissionRepo');
-            $this->cache = new Acl($adapter, $roles, $permission);
+            $cache = null;
+            try {
+                $cache = $this->getDI()->get('cache');
+            } catch (\Phalcon\DI\Exception $exc) {
+                // Fail silently
+            }            
+            $this->cache = new Acl($adapter, $roles, $permission, $cache);
         }
         return $this->cache;
     }
